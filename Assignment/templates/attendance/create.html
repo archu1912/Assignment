@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body_block %}
+
+<script>
+  $(function () {
+      $('.datetime-input-start').datetimepicker({
+          format:'YYYY-MM-DD HH:mm:ss'
+      });
+
+      $('.datetime-input-end').datetimepicker({
+          format:'YYYY-MM-DD HH:mm:ss'
+      });
+  });
+</script>
+  <div class="container">
+    <div class="jumbotron">
+        <h1>Mark your attendance</h1>
+        <form enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+          <!-- {{ attendance.as_ul }} -->
+          
+          
+          <label for="project_name">Project name: </label>
+          {{ attendance.project_name }}
+            <br>
+            <br>
+
+          <label for="task_name">Task name: </label>
+          <input id="task_name" type="text" name="task_name" value="{{ task_name |default_if_none:"" }}" maxlength="100" required> 
+          <!-- {{ attendance.task_name }} -->
+
+          <span>Use upto 100 characters</span>
+          <br>
+          <br>
+
+          <div style="position:relative">
+            <label for="start_time">Start Time: </label>
+            <input id="start_time" type="text" class="datetime-input-start" name="start_time" value="{{ start_time }}" required>
+          </div>
+          <br>
+          <br>
+
+          <div style="position:relative">
+            <label for="end_time">End Time: </label>
+            <input id="end_time" type="end_time" class="datetime-input-end" name="end_time" value="{{ end_time }}">
+          </div>
+          <br>
+          <br>
+          <input type="submit" name="" value="Save">
+        </form>
+        
+    </div>
+  </div>
+
+  
+{% endblock %}
+

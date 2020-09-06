@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body_block %}
+
+
+
+<style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+    </style>
+
+
+
+
+<div class="container">
+    <table>
+        <tr>
+          <!-- <th>Username</th> -->
+            <th>Project Name</th>
+            <th>Task Name</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Update Attendance</th>
+        </tr>
+
+        
+          
+        {% if noItem == False %}
+        {% for data in dataset %}
+          <tr>
+            
+              
+            <!-- <td>{{ data.username }}</td> -->
+              <td>{{ data.project_name|capfirst }}</td>
+              <td> {{ data.task_name }}</td>
+              <td>{{ data.start_time }}</td>
+              <td>{{ data.end_time }}</td> 
+              <td><a href="{% url 'attendance:edit' id=data.id %}">Update</a></td>
+              
+
+              
+          </tr>
+          {% endfor %} 
+          {% else %}
+              <tr>
+                <td colspan="4">No Data Found</td>
+              </tr>
+              {% endif %}
+          
+        
+          
+</table>
+</div>
+{% endblock %}
